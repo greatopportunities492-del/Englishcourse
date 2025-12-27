@@ -3,29 +3,29 @@ name: Deploy Vite App to GitHub Pages
 on:
   push:
     branches:
-      - main  # Деплой будет запускаться при пуше в main
+      - main  # Деплой запускается при пуше в main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Проверка кода
+      # 1️⃣ Скачиваем репозиторий
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Установка Node.js
+      # 2️⃣ Устанавливаем Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Можно указать версию Node.js
+          node-version: '20'  # Можно использовать другую версию, если нужно
 
-      # 3️⃣ Установка зависимостей
+      # 3️⃣ Устанавливаем зависимости
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Сборка проекта
-      - name: Build
+      # 4️⃣ Собираем проект
+      - name: Build project
         run: npm run build
 
       # 5️⃣ Деплой на GitHub Pages
@@ -34,3 +34,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          # Можно явно указать имя ветки для GitHub Pages (по умолчанию gh-pages)
+          publish_branch: gh-pages
