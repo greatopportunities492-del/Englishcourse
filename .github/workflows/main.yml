@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # нужен доступ для записи в ветку gh-pages
+      contents: write  # нужно для записи в ветку gh-pages
 
     steps:
-      # 1️⃣ Скачиваем код
+      # 1️⃣ Клонируем репозиторий
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -25,9 +25,9 @@ jobs:
 
       # 3️⃣ Устанавливаем зависимости
       - name: Install dependencies
-        run: npm ci
+        run: npm install  # заменили npm ci на npm install
 
-      # 4️⃣ Собираем проект
+      # 4️⃣ Сборка проекта
       - name: Build project
         run: npm run build
 
